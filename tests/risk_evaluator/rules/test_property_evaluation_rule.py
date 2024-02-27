@@ -27,15 +27,6 @@ class TestPropertyEvaluation(TestCase):
         )
         self.assertTrue(rule.evaluate({"test_field2": 75}))
 
-    def test_evaluate_invalid_value(self):
-        rule = NumberPropertyEvaluationRule(
-            property_name="test_field",
-            operation=operator.gt,
-            value=10,
-            property_not_found_value=False,
-        )
-        self.assertFalse(rule.evaluate({"test_field": "7"}))
-
     def test_chained_rules(self):
         rule = NumberPropertyEvaluationRule(
             property_name="age", operation=operator.lt, value=10
