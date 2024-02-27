@@ -1,4 +1,4 @@
-import operator
+from typing import Callable
 
 from src.risk_envaluator.rule import Rule
 
@@ -7,7 +7,7 @@ class NumberPropertyEvaluationRule(Rule):
     def __init__(
         self,
         property_name: str,
-        operation: operator,
+        operation: Callable[[int | float, int | float], bool],
         value: int | float,
         property_not_found_value: bool = False,
     ):
