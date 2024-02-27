@@ -4,7 +4,7 @@ import operator
 import sys
 
 from src.risk_envaluator.rules.property_evaluation_rule import (
-    PropertyEvaluationRule,
+    NumberPropertyEvaluationRule,
 )
 
 logging.basicConfig(level=logging.DEBUG)
@@ -22,8 +22,8 @@ if __name__ == "__main__":
         raise ValueError("No dictionary was provided")
 
     rule = (
-        PropertyEvaluationRule("credit_rating", operator.gt, 50)
-        & PropertyEvaluationRule("flood_risk", operator.lt, 10)
-    ) | PropertyEvaluationRule("revenue", operator.gt, 1000000)
+        NumberPropertyEvaluationRule("credit_rating", operator.gt, 50)
+        & NumberPropertyEvaluationRule("flood_risk", operator.lt, 10)
+    ) | NumberPropertyEvaluationRule("revenue", operator.gt, 1000000)
 
     logging.info(f"Evaluation result: {rule.evaluate(data_to_evaluate)}")

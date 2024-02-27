@@ -1,23 +1,25 @@
 import operator
 from unittest import TestCase
 
-from src.risk_envaluator.rules.property_evaluation_rule import PropertyEvaluationRule
+from src.risk_envaluator.rules.property_evaluation_rule import (
+    NumberPropertyEvaluationRule,
+)
 
 
 class TestPropertyEvaluation(TestCase):
     def setUp(self):
-        self.rule = PropertyEvaluationRule(
+        self.rule = NumberPropertyEvaluationRule(
             property_name="test_field", operation=operator.gt, value=10
         )
 
     def test_evaluate(self):
-        rule = PropertyEvaluationRule(
+        rule = NumberPropertyEvaluationRule(
             property_name="test_field", operation=operator.gt, value=10
         )
         self.assertTrue(rule.evaluate({"test_field": 75}))
 
     def test_evaluate_absent_value(self):
-        rule = PropertyEvaluationRule(
+        rule = NumberPropertyEvaluationRule(
             property_name="test_field",
             operation=operator.gt,
             value=10,
@@ -26,7 +28,7 @@ class TestPropertyEvaluation(TestCase):
         self.assertTrue(rule.evaluate({"test_field2": 75}))
 
     def test_evaluate_invalid_value(self):
-        rule = PropertyEvaluationRule(
+        rule = NumberPropertyEvaluationRule(
             property_name="test_field",
             operation=operator.gt,
             value=10,
@@ -35,15 +37,15 @@ class TestPropertyEvaluation(TestCase):
         self.assertFalse(rule.evaluate({"test_field": "7"}))
 
     def test_chained_rules(self):
-        rule = PropertyEvaluationRule(
+        rule = NumberPropertyEvaluationRule(
             property_name="age", operation=operator.lt, value=10
-        ) & PropertyEvaluationRule(
+        ) & NumberPropertyEvaluationRule(
             property_name="height", operation=operator.le, value=5
         ) | (
-            PropertyEvaluationRule(
+            NumberPropertyEvaluationRule(
                 property_name="height", operation=operator.gt, value=10
             )
-            & PropertyEvaluationRule(
+            & NumberPropertyEvaluationRule(
                 property_name="age", operation=operator.gt, value=20
             )
         )
@@ -51,17 +53,17 @@ class TestPropertyEvaluation(TestCase):
         self.assertTrue(rule.evaluate({"age": 22, "height": 11}))
 
         rule = (
-            PropertyEvaluationRule(
+            NumberPropertyEvaluationRule(
                 property_name="age", operation=operator.lt, value=10
             )  #
-            | PropertyEvaluationRule(
+            | NumberPropertyEvaluationRule(
                 property_name="height", operation=operator.le, value=5
             )  # F
         ) & (
-            PropertyEvaluationRule(
+            NumberPropertyEvaluationRule(
                 property_name="height", operation=operator.gt, value=10
             )
-            | PropertyEvaluationRule(
+            | NumberPropertyEvaluationRule(
                 property_name="age", operation=operator.gt, value=20
             )
         )  # F

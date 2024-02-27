@@ -3,7 +3,7 @@ import operator
 from src.risk_envaluator.rule import Rule
 
 
-class PropertyEvaluationRule(Rule):
+class NumberPropertyEvaluationRule(Rule):
     def __init__(
         self,
         property_name: str,
