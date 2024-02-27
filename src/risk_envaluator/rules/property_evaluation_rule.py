@@ -3,7 +3,7 @@ import operator
 from src.risk_envaluator.rule import Rule
 
 
-class PropertyEvaluation(Rule):
+class PropertyEvaluationRule(Rule):
     def __init__(
         self,
         property_name: str,
@@ -19,6 +19,11 @@ class PropertyEvaluation(Rule):
     def evaluate(self, data: dict) -> bool:
         property_value = data.get(self.__property_name, None)
         if property_value is not None:
-            return self.__operation(property_value, self.__value)
+            try:
+                return self.__operation(property_value, self.__value)
+            except TypeError:
+                # here we can gracefully handle the error or raise it depending on the requirement and
+                # team coding standards
+                return self.__property_not_found_value
         else:
             return self.__property_not_found_value

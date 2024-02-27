@@ -86,3 +86,25 @@ class TestAndRule(unittest.TestCase):
         self.assertTrue(result)
         self.rule1.evaluate.assert_called_with(self.data)
         self.rule2.evaluate.assert_called_with(self.data)
+
+
+class TestRule(unittest.TestCase):
+    def setUp(self):
+        class DummyRule(Rule):
+            def evaluate(self, data: dict) -> bool:
+                return True
+
+        self.rule1 = DummyRule()
+        self.rule2 = DummyRule()
+
+    def test_and_operator(self):
+        rule = self.rule1 & self.rule2
+        self.assertIsInstance(rule, AndRule)
+        self.assertEqual(rule.rule1, self.rule1)
+        self.assertEqual(rule.rule2, self.rule2)
+
+    def test_or_operator(self):
+        rule = self.rule1 | self.rule2
+        self.assertIsInstance(rule, OrRule)
+        self.assertEqual(rule.rule1, self.rule1)
+        self.assertEqual(rule.rule2, self.rule2)
