@@ -27,6 +27,7 @@ The docker run command takes a json string as input. The json string should cont
 - credit_rating
 - flood_risk
 - revenue
+
 The dictionary values should be numbers.
 
 > :warning: you must escape the json string
