@@ -16,7 +16,7 @@ class PropertyEvaluationRule(Rule):
         self.__operation = operation
         self.__property_name = property_name
 
-    def evaluate(self, data: dict) -> bool:
+    def evaluate(self, data: dict[str, int]) -> bool:
         property_value = data.get(self.__property_name, None)
         if property_value is not None:
             try:

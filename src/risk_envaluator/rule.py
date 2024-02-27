@@ -4,13 +4,13 @@ from abc import abstractmethod
 
 class Rule(abc.ABC):
     @abstractmethod
-    def evaluate(self, data: dict) -> bool:
+    def evaluate(self, data: dict[str, int]) -> bool:
         pass
 
-    def __or__(self, other):
+    def __or__(self, other) -> "Rule":
         return OrRule(self, other)
 
-    def __and__(self, other):
+    def __and__(self, other) -> "Rule":
         return AndRule(self, other)
 
 
@@ -19,7 +19,7 @@ class OrRule(Rule):
         self.rule1 = rule1
         self.rule2 = rule2
 
-    def evaluate(self, data: dict) -> bool:
+    def evaluate(self, data: dict[str, int]) -> bool:
         return self.rule1.evaluate(data) or self.rule2.evaluate(data)
 
 
@@ -28,5 +28,5 @@ class AndRule(Rule):
         self.rule1 = rule1
         self.rule2 = rule2
 
-    def evaluate(self, data: dict) -> bool:
+    def evaluate(self, data: dict[str, int]) -> bool:
         return self.rule1.evaluate(data) and self.rule2.evaluate(data)
