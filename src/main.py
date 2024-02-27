@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.DEBUG)
 if __name__ == "__main__":
     arguments = sys.argv[1:]
 
-    if arguments:
+    if len(arguments) >= 1:
         try:
             data_to_evaluate = json.loads(arguments[0])
             logging.debug("Received dictionary: %s", data_to_evaluate)

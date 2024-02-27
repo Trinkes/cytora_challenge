@@ -1,5 +1,6 @@
 # Cytora technical challenge
 
+
 ## How to run
 
 ```
@@ -7,6 +8,12 @@ git clone git@github.com:Trinkes/cytora_challenge.git
 cd cytora_challenge 
 docker build -t cytora .
 docker run cytora "{\"credit_rating\":1,\"flood_risk\":1,\"revenue\":1}"
+```
+
+## How to run tests
+```
+docker build -t cytora --target=tests .
+docker run cytora
 ```
 
 ## Assumptions
