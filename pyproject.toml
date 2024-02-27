@@ -1,0 +1,9 @@
+[tool.poetry]
+name = "cytora-challenge"
+version = "0.1.0"
+description = ""
+authors = ["Fábio Costa <fabiojscosta1583@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.12.1"
