@@ -55,10 +55,10 @@ class TestPropertyEvaluation(TestCase):
         rule = (
             NumberPropertyEvaluationRule(
                 property_name="age", operation=operator.lt, value=10
-            )  #
+            )
             | NumberPropertyEvaluationRule(
                 property_name="height", operation=operator.le, value=5
-            )  # F
+            )
         ) & (
             NumberPropertyEvaluationRule(
                 property_name="height", operation=operator.gt, value=10
@@ -66,7 +66,7 @@ class TestPropertyEvaluation(TestCase):
             | NumberPropertyEvaluationRule(
                 property_name="age", operation=operator.gt, value=20
             )
-        )  # F
+        )
         self.assertFalse(rule.evaluate({"age": 5, "height": 5}))
         self.assertFalse(rule.evaluate({"age": 22, "height": 11}))
         self.assertTrue(rule.evaluate({"age": 22, "height": 1}))
